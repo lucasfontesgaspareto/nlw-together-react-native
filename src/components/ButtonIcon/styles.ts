@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
   },
   title: {
     flex: 1,
-    color: theme.colors.secondary,
+    color: theme.colors.secondary100,
     fontSize: 15,
     textAlign: 'center'
   },
