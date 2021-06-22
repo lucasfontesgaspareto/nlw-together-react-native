@@ -46,7 +46,7 @@ $ npm start
 
 You can view the project layout through the links below:
 
-- [Layout](https://www.figma.com/file/0kv33XYjvOgvKGKHBaiR07/GamePlay-NLW-Together/duplicate)
+- [Layout](<https://www.figma.com/file/QuGsKlxxUgoNccIf78dNWo/GamePlay---NLW-Together-(ggPlay)?node-id=58924%3A898/duplicate>)
 
 Remembering that you need to have a [Figma](http://figma.com/) account to access it.
 
