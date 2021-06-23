@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { SignIn } from '../screens/SignIn'
 import Home from "../screens/Home";
 import { theme } from "../global/styles/theme";
+import AppointmentDetails from "../screens/AppointmentDetails";
 
 const { Navigator, Screen } = createStackNavigator()
 
@@ -15,7 +16,6 @@ const AuthRoutes: React.FC = () => {
         backgroundColor: theme.colors.secondary100
       }
     }}
-    initialRouteName="Home"
   >
     <Screen
       name="SignIn"
@@ -24,6 +24,10 @@ const AuthRoutes: React.FC = () => {
     <Screen
       name="Home"
       component={Home}
+    ></Screen>
+    <Screen
+      name="AppointmentDetails"
+      component={AppointmentDetails}
     ></Screen>
   </Navigator>)
 }

@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { FlatList, View, Text } from 'react-native';
 import Appointment, { AppointmentProps } from '../../components/Appointment';
@@ -10,6 +11,7 @@ import Profile from '../../components/Profile';
 import { styles } from './styles';
 
 const Home: React.FC = () => {
+  const navigation = useNavigation();
   const [category, setcategory] = useState('');
 
   const apppointments: AppointmentProps[] = [
@@ -43,6 +45,10 @@ const Home: React.FC = () => {
     categoryId === category ? setcategory('') : setcategory(categoryId)
   }
 
+  function handleAppointmentDetails() {
+    navigation.navigate('AppointmentDetails')
+  }
+
   return (
     <Background>
       <View style={styles.container}>
@@ -68,6 +74,7 @@ const Home: React.FC = () => {
             renderItem={(info => (
               <Appointment
                 data={info.item}
+                onPress={handleAppointmentDetails}
               ></Appointment>
             ))}
             style={styles.matches}

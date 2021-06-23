@@ -17,6 +17,7 @@ export const theme = {
     heading: '#DDE3F0',
     line: '#0A1033',
     on: '#32BD50',
+    danger: '#E51C44',
   },
 
   fonts: {
