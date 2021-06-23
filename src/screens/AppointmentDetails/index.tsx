@@ -19,7 +19,7 @@ const AppointmentDetails: React.FC = () => {
     <Background>
       <View style={styles.container}>
         <Header
-          title="Appointment"
+          title="Detalhes"
           action={
             <BorderlessButton>
               <Fontisto
