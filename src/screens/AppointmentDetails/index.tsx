@@ -25,7 +25,7 @@ const AppointmentDetails: React.FC = () => {
               <Fontisto
                 name="share"
                 size={20}
-                color={theme.colors.primary}
+                color={theme.colors.light}
               />
             </BorderlessButton>
           }
@@ -64,12 +64,13 @@ const AppointmentDetails: React.FC = () => {
           renderItem={({ item }) => (
             <Member data={item}/>
           )}
+          showsHorizontalScrollIndicator={false}
           ItemSeparatorComponent={ListDivider}
           style={styles.members}
         ></FlatList>
 
         <View style={styles.footer}>
-          <ButtonIcon title="Entrar na partida"></ButtonIcon>
+          <ButtonIcon title="Entrar na partida" status="success"/>
         </View>
       </View>
     </Background>

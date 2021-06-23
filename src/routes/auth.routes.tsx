@@ -6,6 +6,7 @@ import Home from "../screens/Home";
 import { theme } from "../global/styles/theme";
 import AppointmentDetails from "../screens/AppointmentDetails";
 import AppointmentCreate from "../screens/AppointmentCreate";
+import Guilds from "../screens/Guilds";
 
 const { Navigator, Screen } = createStackNavigator()
 
@@ -33,6 +34,10 @@ const AuthRoutes: React.FC = () => {
     <Screen
       name="AppointmentCreate"
       component={AppointmentCreate}
+    ></Screen>
+    <Screen
+      name="Guilds"
+      component={Guilds}
     ></Screen>
   </Navigator>)
 }

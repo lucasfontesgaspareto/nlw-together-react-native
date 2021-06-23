@@ -6,28 +6,31 @@ import Header from '../../components/Header';
 import { styles } from './styles';
 import { Feather } from '@expo/vector-icons'
 import { theme } from '../../global/styles/theme';
-import { ImageBackground } from 'react-native';
-
-import BannerImg from '../../assets/banner.png'
-import ListHeader from '../../components/ListHeader';
-import Member, { MemberProps } from '../../components/Member';
-import ListDivider from '../../components/ListDivider';
-import ButtonIcon from '../../components/ButtonIcon';
 import CategorySelect from '../../components/CategorySelect';
 import GuildIcon from '../../components/GuildIcon';
 import SmallInput from '../../components/SmallInput';
 import TextArea from '../../components/TextArea';
 import Button from '../../components/Button';
-
-type Props = {
-  
-}
+import ModalView from '../../components/ModalView';
+import Guilds from '../Guilds';
+import { GuildProps } from '../../components/Guild';
 
 const AppointmentCreate: React.FC = () => {
   const [category, setcategory] = useState('');
+  const [openGuildsModal, setopenGuildsModal] = useState(false);
+  const [guild, setguild] = useState<GuildProps>({} as GuildProps);
 
   function handleCategorySelect(categoryId: string) {
     categoryId === category ? setcategory('') : setcategory(categoryId)
+  }
+
+  function handleOpenGuilds() {
+    setopenGuildsModal(true)
+  }
+
+  function handleGuildSelect(guildSelect: GuildProps) {
+    setopenGuildsModal(false)
+    setguild(guildSelect)
   }
 
   return (
@@ -59,12 +62,11 @@ const AppointmentCreate: React.FC = () => {
         <View style={styles.form}>
           <RectButton>
             <View style={styles.select}>
-              {/* <View style={styles.image}/> */}
-              <GuildIcon/>
+              {guild.icon ? <GuildIcon/> : <View style={styles.image}/>}
               
               <View style={styles.selectBody}>
                 <Text style={styles.label}>
-                  Selecione um servidor
+                  {guild.name ? guild.name : 'Selecione um servidor'}
                 </Text>
               </View>
               
@@ -120,10 +122,17 @@ const AppointmentCreate: React.FC = () => {
           />
 
           <View style={styles.footer}>
-            <Button title="Agendar"></Button>
+            <Button
+              title="Agendar"
+              onPress={handleOpenGuilds}  
+            ></Button>
           </View>
         </View>
       </ScrollView>
+
+      <ModalView visible={openGuildsModal}>
+        <Guilds handleGuildSelect={handleGuildSelect}/>
+      </ModalView>
     </KeyboardAvoidingView>
   );
 }

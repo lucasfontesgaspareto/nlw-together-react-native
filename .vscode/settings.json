@@ -1,7 +1,6 @@
 {
   "editor.fontLigatures": true,
 
-  // Demais configurações
   "workbench.colorTheme": "Omni",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.startupEditor": "newUntitledFile",
