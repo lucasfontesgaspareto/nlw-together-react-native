@@ -31,7 +31,7 @@ const Home: React.FC = () => {
       id: '2',
       guild: {
         id: '1',
-        name: 'Lendários',
+        name: 'Legionários',
         icon: null,
         owner: false,
       },
@@ -71,7 +71,7 @@ const Home: React.FC = () => {
         <View style={styles.content}>
           <ListHeader
             title="Partidas agendadas"
-            subtitle="Total 6"
+            subtitle="Total 2"
           />
 
           <FlatList

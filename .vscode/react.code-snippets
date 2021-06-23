@@ -1,0 +1,38 @@
+{
+	"React-Native Functional Stateful Component": {
+			"prefix": "rnc",
+			"body": [
+					"import React from 'react';",
+					"import { View } from 'react-native';",
+					"import { styles } from './styles';",
+					"",
+					"export function ${TM_DIRECTORY/^.+\\\\(.*)$/$1/}() {",
+					"  return(",
+					"    <View style={styles.container}>",
+					"       ",
+					"    </View>",
+					"  );",
+					"};",
+					""
+			],
+			"description": "React-Native Functional Stateful Component"
+	},
+	"React-Native styles StyleSheet": {
+			"prefix": "rns",
+			"body": [
+					"import { StyleSheet } from 'react-native';",
+					"import { theme } from '../../global/styles/theme';",
+					"",
+					"export const styles = StyleSheet.create({",
+					"  container: {",
+					"    flex: 1,",
+					"    alignItems: 'center',",
+					"    justifyContent: 'center',",
+					"  },",
+					"});",
+					""
+			],
+			"description": "React-Native styles StyleSheet"
+	}
+}
+
