@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FlatList, View, Text } from 'react-native';
 import Appointment, { AppointmentProps } from '../../components/Appointment';
+import Background from '../../components/Background';
 import ButtonAdd from '../../components/ButtonAdd';
 import CategorySelect from '../../components/CategorySelect';
 import ListDivider from '../../components/ListDivider';
@@ -42,37 +43,41 @@ const Home: React.FC = () => {
     categoryId === category ? setcategory('') : setcategory(categoryId)
   }
 
-  return <View style={styles.container}>
-    <View style={styles.header}>
-      <Profile></Profile>
-      <ButtonAdd></ButtonAdd>
-    </View>
+  return (
+    <Background>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Profile></Profile>
+          <ButtonAdd></ButtonAdd>
+        </View>
 
-    <CategorySelect
-      categorySelected={category}
-      setCategory={handleCategorySelect}
-    ></CategorySelect>
+        <CategorySelect
+          categorySelected={category}
+          setCategory={handleCategorySelect}
+        ></CategorySelect>
 
-    <View style={styles.content}>
-      <ListHeader
-        title="Partidas agendadas"
-        subtitle="Total 6"
-      />
+        <View style={styles.content}>
+          <ListHeader
+            title="Partidas agendadas"
+            subtitle="Total 6"
+          />
 
-      <FlatList
-        data={apppointments}
-        keyExtractor={item => item.id}
-        renderItem={(info => (
-          <Appointment
-            data={info.item}
-          ></Appointment>
-        ))}
-        style={styles.matches}
-        showsVerticalScrollIndicator={false}
-        ItemSeparatorComponent={ListDivider}
-      />
-    </View>
-  </View>;
+          <FlatList
+            data={apppointments}
+            keyExtractor={item => item.id}
+            renderItem={(info => (
+              <Appointment
+                data={info.item}
+              ></Appointment>
+            ))}
+            style={styles.matches}
+            showsVerticalScrollIndicator={false}
+            ItemSeparatorComponent={ListDivider}
+          />
+        </View>
+      </View>
+    </Background>
+  );
 }
 
 export default Home;
