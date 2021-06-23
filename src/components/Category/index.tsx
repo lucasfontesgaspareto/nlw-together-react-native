@@ -20,27 +20,28 @@ const Category: React.FC<Props> = ({
   hasCheckBox = false,
   ...rest
 }) => {
-  return <RectButton {...rest}
-  >
-    <LinearGradient
-      style={styles.container}
-      colors={[theme.colors.secondary50, theme.colors.secondary70]}
-    >
-      <LinearGradient 
-        style={[styles.content, { opacity: checked ? 1 : 0.4 }]}
-        colors={[ checked ? theme.colors.secondary85 : theme.colors.secondary50, theme.colors.secondary40 ]}
+  return (
+    <RectButton {...rest}>
+      <LinearGradient
+        style={styles.container}
+        colors={[theme.colors.secondary50, theme.colors.secondary70]}
       >
-        {hasCheckBox && <View style={checked ? styles.checked : styles.check}></View>}
+        <LinearGradient 
+          style={[styles.content, { opacity: checked ? 1 : 0.4 }]}
+          colors={[ checked ? theme.colors.secondary85 : theme.colors.secondary50, theme.colors.secondary40 ]}
+        >
+          {hasCheckBox && <View style={checked ? styles.checked : styles.check}></View>}
 
-        <Icon
-          width={48}
-          height={48}
-        />
+          <Icon
+            width={48}
+            height={48}
+          />
 
-        <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title}>{title}</Text>
+        </LinearGradient>
       </LinearGradient>
-    </LinearGradient>
-  </RectButton>;
+    </RectButton>
+  );
 }
 
 export default Category;

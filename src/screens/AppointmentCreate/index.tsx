@@ -75,32 +75,30 @@ const AppointmentCreate: React.FC = () => {
               />
             </View>
           </RectButton>
-
+          
           <View style={styles.field}>
             <View>
               <Text style={styles.label}>
                 Dia e mês
               </Text>
-            </View>
 
-            <View style={styles.column}>
-              <SmallInput maxLength={2}/>
-              <Text style={styles.divider}>/</Text>
-              <SmallInput maxLength={2}/>
+              <View style={styles.column}>
+                <SmallInput maxLength={2}/>
+                <Text style={styles.divider}>/</Text>
+                <SmallInput maxLength={2}/>
+              </View>
             </View>
-          </View>
-
-          <View style={styles.field}>
+            
             <View>
               <Text style={styles.label}>
                 Hora e minuto
               </Text>
-            </View>
 
-            <View style={styles.column}>
-              <SmallInput maxLength={2}/>
-              <Text style={styles.divider}>:</Text>
-              <SmallInput maxLength={2}/>
+              <View style={styles.column}>
+                <SmallInput maxLength={2}/>
+                <Text style={styles.divider}>:</Text>
+                <SmallInput maxLength={2}/>
+              </View>
             </View>
           </View>
 
