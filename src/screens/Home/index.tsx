@@ -8,13 +8,11 @@ import CategorySelect from '../../components/CategorySelect';
 import ListDivider from '../../components/ListDivider';
 import ListHeader from '../../components/ListHeader';
 import Profile from '../../components/Profile';
-import { useAuth } from '../../hooks/auth';
 import { styles } from './styles';
 
 const Home: React.FC = () => {
   const navigation = useNavigation();
   const [category, setcategory] = useState('');
-  const { user } = useAuth()
 
   const apppointments: AppointmentProps[] = [
     {
@@ -59,7 +57,7 @@ const Home: React.FC = () => {
     <Background>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Profile user={user}></Profile>
+          <Profile></Profile>
           <ButtonAdd
             onPress={handleAppointmentCreate}
           ></ButtonAdd>
