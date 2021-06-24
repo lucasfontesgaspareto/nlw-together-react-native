@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
   label: {
     fontFamily: theme.fonts.title700,
     color: theme.colors.heading,
-    fontSize: 18
+    fontSize: 18,
   },
   form: {
     paddingHorizontal: 24,
@@ -33,7 +33,8 @@ export const styles = StyleSheet.create({
   image: {
     width: 64,
     height: 68,
-    backgroundColor: theme.colors.secondary50,
+    backgroundColor: theme.colors.secondary40,
+    borderColor: theme.colors.secondary50,
     borderWidth: 1,
     borderRadius: 8,
   },

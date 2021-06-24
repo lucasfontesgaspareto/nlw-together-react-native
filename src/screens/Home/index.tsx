@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { FlatList, View, Text } from 'react-native';
+import { FlatList, View } from 'react-native';
 import Appointment, { AppointmentProps } from '../../components/Appointment';
 import Background from '../../components/Background';
 import ButtonAdd from '../../components/ButtonAdd';
@@ -38,7 +38,7 @@ const Home: React.FC = () => {
       category: '1',
       date: '22/06 às 20h40',
       description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
-    }
+    },
   ]
 
   function handleCategorySelect(categoryId: string) {
@@ -68,26 +68,25 @@ const Home: React.FC = () => {
           setCategory={handleCategorySelect}
         ></CategorySelect>
 
-        <View style={styles.content}>
-          <ListHeader
-            title="Partidas agendadas"
-            subtitle="Total 2"
-          />
+        <ListHeader
+          title="Partidas agendadas"
+          subtitle="Total 2"
+        />
 
-          <FlatList
-            data={apppointments}
-            keyExtractor={item => item.id}
-            renderItem={(info => (
-              <Appointment
-                data={info.item}
-                onPress={handleAppointmentDetails}
-              ></Appointment>
-            ))}
-            style={styles.matches}
-            showsVerticalScrollIndicator={false}
-            ItemSeparatorComponent={ListDivider}
-          />
-        </View>
+        <FlatList
+          data={apppointments}
+          keyExtractor={item => item.id}
+          renderItem={(info => (
+            <Appointment
+              data={info.item}
+              onPress={handleAppointmentDetails}
+            ></Appointment>
+          ))}
+          style={styles.matches}
+          showsVerticalScrollIndicator={false}
+          ItemSeparatorComponent={ListDivider}
+          contentContainerStyle={{ paddingBottom: 69 }}
+        />
       </View>
     </Background>
   );

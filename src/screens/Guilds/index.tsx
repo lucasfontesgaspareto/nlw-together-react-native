@@ -22,7 +22,7 @@ const Guilds: React.FC<Props> = ({ handleGuildSelect }) => {
       name: 'Legionarios',
       icon: 'img.png',
       owner: false
-    }
+    },
   ] as GuildProps[];
 
   return (
@@ -37,8 +37,13 @@ const Guilds: React.FC<Props> = ({ handleGuildSelect }) => {
           />
         )}
         showsHorizontalScrollIndicator={false}
-        ItemSeparatorComponent={ListDivider}
+        ItemSeparatorComponent={() => <ListDivider isCentered/>}
+        ListHeaderComponent={() => <ListDivider isCentered/>}
         style={styles.guilds}
+        contentContainerStyle={{
+          paddingBottom: 69,
+          paddingTop: 104,
+        }}
       ></FlatList>
     </View>
   );

@@ -7,6 +7,7 @@ const SmallInput: React.FC<TextInputProps> = ({ ...rest }) => {
   return <TextInput
     style={styles.container}
     keyboardType="numeric"
+    { ...rest }
   />;
 }
 
