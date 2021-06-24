@@ -65,7 +65,7 @@ const AppointmentDetails: React.FC = () => {
             <Member data={item}/>
           )}
           showsHorizontalScrollIndicator={false}
-          ItemSeparatorComponent={ListDivider}
+          ItemSeparatorComponent={() => <ListDivider isCentered/>}
           style={styles.members}
         ></FlatList>
 

@@ -1,15 +1,12 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import Home from "../screens/Home";
 import { theme } from "../global/styles/theme";
-import AppointmentDetails from "../screens/AppointmentDetails";
-import AppointmentCreate from "../screens/AppointmentCreate";
-import Guilds from "../screens/Guilds";
+import { SignIn } from "../screens/SignIn";
 
 const { Navigator, Screen } = createStackNavigator()
 
-const AuthRoutes: React.FC = () => {
+const PublicRoutes: React.FC = () => {
   return (<Navigator
     headerMode="none"
     screenOptions={{
@@ -19,22 +16,10 @@ const AuthRoutes: React.FC = () => {
     }}
   >
     <Screen
-      name="Home"
-      component={Home}
-    ></Screen>
-    <Screen
-      name="AppointmentDetails"
-      component={AppointmentDetails}
-    ></Screen>
-    <Screen
-      name="AppointmentCreate"
-      component={AppointmentCreate}
-    ></Screen>
-    <Screen
-      name="Guilds"
-      component={Guilds}
+      name="SignIn"
+      component={SignIn}
     ></Screen>
   </Navigator>)
 }
 
-export default AuthRoutes
+export default PublicRoutes
