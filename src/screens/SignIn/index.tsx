@@ -7,11 +7,21 @@ import illustrationImg from '../../assets/illustration.png'
 import ButtonIcon from '../../components/ButtonIcon';
 import { useNavigation } from '@react-navigation/native';
 import Background from '../../components/Background';
+import { useAuth } from '../../hooks/auth';
 
 export const SignIn: React.FC = () => {
   const navigation = useNavigation()
+  const { setUser } = useAuth()
 
   function handleSignIn() {
+    setUser({
+      id: '1',
+      username: 'Lucas',
+      firstName: 'Lucas',
+      avatar: 'https://github.com/lucasfontesgaspareto.png',
+      email: 'lucasfontesgaspareto@gmail.com',
+      token: '1'
+    })
     navigation.navigate('Home')
   }
 
