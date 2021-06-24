@@ -1,12 +1,24 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { useAuth } from '../../hooks/auth';
 import Avatar from '../Avatar';
 import { styles } from './styles';
 
 const Profile: React.FC = () => {
+  const { user } = useAuth()
+
+  const textos = [
+    "Hoje é dia de conquista",
+    "Hoje a vitória será sua!",
+    "Hoje GG não escapa",
+    "Hoje é dia de ganhar"
+  ]
+
+  const randomIndex = Math.floor(Math.random() * 4)
+
   return (
     <View style={styles.container}>
-      <Avatar urlImage="https://github.com/lucasfontesgaspareto.png" />
+      <Avatar urlImage={user.avatar} />
 
       <View>
         <View style={styles.user}>
@@ -14,12 +26,12 @@ const Profile: React.FC = () => {
             Olá,
           </Text>
           <Text style={styles.username}>
-            Lucas
+            {user.firstName}
           </Text>
         </View>
 
         <Text style={styles.message}>
-          Hoje é dia de conquista
+          { textos[randomIndex] }
         </Text>
       </View>
     </View>
