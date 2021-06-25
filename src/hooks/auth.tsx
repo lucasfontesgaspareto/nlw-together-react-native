@@ -36,6 +36,7 @@ export type AuthorizationResponse = AuthSession.AuthSessionResult & {
 type AuthContextData = {
   user: User;
   signIn: () => Promise<void>;
+  signOut: () => Promise<void>;
   loading: boolean;
 }
 
@@ -95,6 +96,11 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  async function signOut() {
+    setUser({} as User)
+    return AsyncStorage.removeItem(COLLECTION_USERS)
+  }
+
   useEffect(() => {
     loadUserStorageData()
   }, []);
@@ -105,6 +111,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         user,
         signIn,
         loading,
+        signOut,
       }}
     >
       { children }
