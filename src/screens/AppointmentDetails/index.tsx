@@ -18,6 +18,8 @@ import { api } from '../../services/api';
 import { Load } from '../../components/Load';
 import { useRoute } from '@react-navigation/native';
 
+import * as Linking from 'expo-linking'
+
 type Params = {
   guildSelected: AppointmentProps
 }
@@ -60,6 +62,10 @@ const AppointmentDetails: React.FC = () => {
       message,
       url: widget.instant_invite
     })
+  }
+
+  function handleOpenGuild() {
+    Linking.openURL(widget.instant_invite)
   }
 
   useEffect(() => {
@@ -119,7 +125,14 @@ const AppointmentDetails: React.FC = () => {
         }
 
         <View style={styles.footer}>
-          <ButtonIcon title="Entrar na partida" status="success"/>
+          {
+            widget.instant_invite &&
+            <ButtonIcon
+              title="Entrar na partida"
+              status="success"
+              onPress={handleOpenGuild}  
+            />
+          }
         </View>
       </View>
     </Background>
