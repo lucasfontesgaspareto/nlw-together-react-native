@@ -20,36 +20,86 @@ import { COLLECTION_APPOINTMENTS } from '../../config/database';
 import { useNavigation } from '@react-navigation/native';
 
 const AppointmentCreate: React.FC = () => {
-  const [category, setcategory] = useState('');
-  const [openGuildsModal, setopenGuildsModal] = useState(false);
-  const [guild, setguild] = useState<GuildProps>({} as GuildProps);
+  const [category, setCategory] = useState('');
+  const [openGuildsModal, setOpenGuildsModal] = useState(false);
+  const [guild, setGuild] = useState<GuildProps>({} as GuildProps);
 
   const [day, setDay] = useState('');
   const [month, setMonth] = useState('');
   const [hour, setHour] = useState('');
   const [minute, setMinute] = useState('');
   const [description, setDescription] = useState('');
+  const [categoryError, setCategoryError] = useState(false);
+  const [guildError, setGuildError] = useState(false);
+  const [dayError, setDayError] = useState(false);
+  const [monthError, setMonthError] = useState(false);
+  const [hourError, setHourError] = useState(false);
+  const [minuteError, setMinuteError] = useState(false);
+  const [descriptionError, setDescriptionError] = useState(false);
 
   const navigation = useNavigation()
 
   function handleCategorySelect(categoryId: string) {
-    categoryId === category ? setcategory('') : setcategory(categoryId)
+    categoryId === category ? setCategory('') : setCategory(categoryId)
+    setCategoryError(false)
   }
 
   function handleOpenGuilds() {
-    setopenGuildsModal(true)
+    setOpenGuildsModal(true)
   }
 
   function handleGuildSelect(guildSelect: GuildProps) {
-    setopenGuildsModal(false)
-    setguild(guildSelect)
+    setOpenGuildsModal(false)
+    setGuild(guildSelect)
+    setGuildError(false)
   }
 
   function handleCloseModal() {
-    setopenGuildsModal(false)
+    setOpenGuildsModal(false)
   }
 
   async function handleSave() {
+
+    if (!category) {
+      setCategoryError(true)
+    }
+
+    if (!guild?.id) {
+      setGuildError(true)
+    }
+
+    if (!day) {
+      setDayError(true);
+    }
+
+    if (!month) {
+      setMonthError(true);
+    }
+
+    if (!hour) {
+      setHourError(true);
+    }
+
+    if (!minute) {
+      setMinuteError(true);
+    }    
+
+    if (!description) {
+      setDescriptionError(true);
+    }
+
+    if (
+      !category ||
+      !guild ||
+      !day ||
+      !month ||
+      !hour ||
+      !minute ||
+      !description
+    ) {
+      return false
+    }
+    
     const newAppointment = {
       id: uid(),
       guild,
@@ -59,6 +109,7 @@ const AppointmentCreate: React.FC = () => {
     }
 
     const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS)
+
     const appointments = storage ? JSON.parse(storage) : []
     
     await AsyncStorage.setItem(
@@ -92,13 +143,14 @@ const AppointmentCreate: React.FC = () => {
 
           <CategorySelect
             hasCheckBox
+            hasError={categoryError}
             categorySelected={category}
             setCategory={handleCategorySelect}
           ></CategorySelect>
 
           <View style={styles.form}>
             <RectButton onPress={handleOpenGuilds}>
-              <View style={styles.select}>
+              <View style={[styles.select, guildError ? styles.selectError : {} ]}>
                 <GuildIcon
                   guildId={guild.id}
                   iconId={guild.icon}
@@ -128,11 +180,13 @@ const AppointmentCreate: React.FC = () => {
                   <SmallInput
                     maxLength={2}
                     onChangeText={setDay}
+                    hasError={dayError}
                   />
                   <Text style={styles.divider}>/</Text>
                   <SmallInput
                     maxLength={2}
                     onChangeText={setMonth}
+                    hasError={monthError}
                   />
                 </View>
               </View>
@@ -146,11 +200,13 @@ const AppointmentCreate: React.FC = () => {
                   <SmallInput
                     maxLength={2}
                     onChangeText={setHour}
+                    hasError={hourError}
                   />
                   <Text style={styles.divider}>:</Text>
                   <SmallInput
                     maxLength={2}
                     onChangeText={setMinute}
+                    hasError={minuteError}
                   />
                 </View>
               </View>
@@ -172,6 +228,7 @@ const AppointmentCreate: React.FC = () => {
               numberOfLines={5}
               autoCorrect={false}
               onChangeText={setDescription}
+              hasError={descriptionError}
             />
 
             <View style={styles.footer}>

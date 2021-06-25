@@ -26,6 +26,9 @@ export const styles = StyleSheet.create({
     paddingRight: 25,
     overflow: 'hidden',
   },
+  selectError: {
+    borderColor: theme.colors.danger,
+  },
   selectBody: {
     flex: 1,
     alignItems: 'center',

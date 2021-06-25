@@ -3,9 +3,13 @@ import { TextInput, TextInputProps } from 'react-native';
 
 import { styles } from './styles';
 
-const SmallInput: React.FC<TextInputProps> = ({ ...rest }) => {
+type Props = TextInputProps & {
+  hasError?: boolean;
+}
+
+const SmallInput: React.FC<Props> = ({ hasError, ...rest }) => {
   return <TextInput
-    style={styles.container}
+    style={[styles.container, hasError ? styles.error : {}]}
     keyboardType="numeric"
     { ...rest }
   />;

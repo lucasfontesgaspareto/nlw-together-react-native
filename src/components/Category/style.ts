@@ -10,6 +10,11 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     marginRight: 8,
   },
+  error: {
+    borderColor: theme.colors.danger,
+    borderWidth: 1,
+    borderRadius: 8,
+  },
   content: {
     width: 100,
     height: 116,

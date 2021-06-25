@@ -15,5 +15,8 @@ export const styles = StyleSheet.create({
     borderColor: theme.colors.secondary50,
     padding: 16,
     textAlignVertical: 'top'
+  },
+  error: {
+    borderColor: theme.colors.danger,
   }
 })

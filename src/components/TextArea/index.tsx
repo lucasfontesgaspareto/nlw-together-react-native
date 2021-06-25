@@ -2,9 +2,13 @@ import React from 'react';
 import { TextInput, TextInputProps } from 'react-native';
 import { styles } from './styles';
 
-const TextArea: React.FC<TextInputProps> = ({ ...rest }) => {
+type Props = TextInputProps & {
+  hasError?: boolean;
+}
+
+const TextArea: React.FC<Props> = ({ hasError, ...rest }) => {
   return <TextInput
-    style={styles.container}
+    style={[styles.container, hasError ? styles.error : {}]}
     { ...rest }
   />;
 }

@@ -34,7 +34,6 @@ const Home: React.FC = () => {
   async function loadAppointments() {
     try {
       setLoading(true)
-      
       const response = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS)
   
       const storage: AppointmentProps[] = response ? JSON.parse(response) : []
