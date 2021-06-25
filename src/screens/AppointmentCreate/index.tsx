@@ -14,11 +14,23 @@ import Button from '../../components/Button';
 import ModalView from '../../components/ModalView';
 import Guilds from '../Guilds';
 import { GuildProps } from '../../components/Guild';
+import { uid } from '../../utils/uid';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { COLLECTION_APPOINTMENTS } from '../../config/database';
+import { useNavigation } from '@react-navigation/native';
 
 const AppointmentCreate: React.FC = () => {
   const [category, setcategory] = useState('');
   const [openGuildsModal, setopenGuildsModal] = useState(false);
   const [guild, setguild] = useState<GuildProps>({} as GuildProps);
+
+  const [day, setDay] = useState('');
+  const [month, setMonth] = useState('');
+  const [hour, setHour] = useState('');
+  const [minute, setMinute] = useState('');
+  const [description, setDescription] = useState('');
+
+  const navigation = useNavigation()
 
   function handleCategorySelect(categoryId: string) {
     categoryId === category ? setcategory('') : setcategory(categoryId)
@@ -35,6 +47,26 @@ const AppointmentCreate: React.FC = () => {
 
   function handleCloseModal() {
     setopenGuildsModal(false)
+  }
+
+  async function handleSave() {
+    const newAppointment = {
+      id: uid(),
+      guild,
+      category,
+      date: `${day}/${month} às ${hour}:${minute}h`,
+      description
+    }
+
+    const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS)
+    const appointments = storage ? JSON.parse(storage) : []
+    
+    await AsyncStorage.setItem(
+      COLLECTION_APPOINTMENTS,
+      JSON.stringify([ ...appointments, newAppointment ])
+    )
+
+    navigation.navigate('Home')
   }
 
   return (
@@ -93,9 +125,15 @@ const AppointmentCreate: React.FC = () => {
                 </Text>
 
                 <View style={styles.column}>
-                  <SmallInput maxLength={2}/>
+                  <SmallInput
+                    maxLength={2}
+                    onChangeText={setDay}
+                  />
                   <Text style={styles.divider}>/</Text>
-                  <SmallInput maxLength={2}/>
+                  <SmallInput
+                    maxLength={2}
+                    onChangeText={setMonth}
+                  />
                 </View>
               </View>
               
@@ -105,9 +143,15 @@ const AppointmentCreate: React.FC = () => {
                 </Text>
 
                 <View style={styles.column}>
-                  <SmallInput maxLength={2}/>
+                  <SmallInput
+                    maxLength={2}
+                    onChangeText={setHour}
+                  />
                   <Text style={styles.divider}>:</Text>
-                  <SmallInput maxLength={2}/>
+                  <SmallInput
+                    maxLength={2}
+                    onChangeText={setMinute}
+                  />
                 </View>
               </View>
             </View>
@@ -127,11 +171,13 @@ const AppointmentCreate: React.FC = () => {
               maxLength={100}
               numberOfLines={5}
               autoCorrect={false}
+              onChangeText={setDescription}
             />
 
             <View style={styles.footer}>
               <Button
                 title="Agendar"
+                onPress={handleSave}
               ></Button>
             </View>
           </View>
