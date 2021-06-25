@@ -110,8 +110,8 @@ function AuthProvider({ children }: AuthProviderProps) {
   }
 
   async function signOut() {
-    setUser({} as User)
-    return AsyncStorage.removeItem(COLLECTION_USERS)
+    await AsyncStorage.removeItem(COLLECTION_USERS)
+    return setUser({} as User)
   }
 
   useEffect(() => {

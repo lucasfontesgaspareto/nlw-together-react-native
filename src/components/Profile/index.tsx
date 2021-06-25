@@ -1,8 +1,9 @@
-import React from 'react';
-import { View, Text, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { useAuth } from '../../hooks/auth';
 import Avatar from '../Avatar';
+import ModalSignOut from '../ModalSignOut';
 import { styles } from './styles';
 
 const textos = [
@@ -15,26 +16,26 @@ const textos = [
 const randomIndex = Math.floor(Math.random() * 4)
 
 const Profile: React.FC = () => {
-  const { user } = useAuth()
+  const { user, signOut } = useAuth()
 
-  const { signOut } = useAuth();
+  const [openSignOutModal, setOpenSignOutModal] = useState(false);
 
-  async function handleLogout() {
-    Alert.alert('Sair', 'Deseja sair do ggplay?', [
-      {
-        text: 'Não',
-        style: 'cancel',
-      },
-      {
-        text: 'Sim',
-        onPress: signOut,
-      },
-    ])
+  function handleOpenSignOut() {
+    setOpenSignOutModal(true)
+  }
+
+  function handleSignOut() {
+    setOpenSignOutModal(false)
+    return signOut()
+  }
+
+  function handleCancel() {
+    setOpenSignOutModal(false)
   }
 
   return (
     <View style={styles.container}>
-      <RectButton onPress={handleLogout}>
+      <RectButton onPress={handleOpenSignOut}>
         <Avatar urlImage={user.avatar} />
       </RectButton>
 
@@ -52,6 +53,12 @@ const Profile: React.FC = () => {
           { textos[randomIndex] }
         </Text>
       </View>
+      
+      <ModalSignOut
+        visible={openSignOutModal}
+        onConfirm={handleSignOut}
+        onCancel={handleCancel}
+      />
     </View>
   );
 }
