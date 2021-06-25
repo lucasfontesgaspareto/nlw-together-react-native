@@ -62,23 +62,36 @@ function AuthProvider({ children }: AuthProviderProps) {
 
       if (type === 'success' && !params.error) {
         api.defaults.headers.authorization = `Bearer ${params.access_token}`
-
-        const userInfo = await api.get('/users/@me');
-        const firstName = userInfo.data.username.split(' ')[0];
-
-        userInfo.data.avatar = `${CDN_IMAGE}/avatars/${userInfo.data.id}/${userInfo.data.avatar}`
-
-        const userData = {
-          ...userInfo.data,
-          firstName,
-        }
-
-        await AsyncStorage.setItem(COLLECTION_USERS, JSON.stringify(userData))
-
-        setUser(userData)
+        await me()
       }
     } catch (error) {
       throw new Error('Não foi possível autenticar')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function me() {
+    try {
+      setLoading(true)
+      
+      const userInfo = await api.get('/users/@me');
+      const firstName = userInfo.data.username.split(' ')[0];
+
+      userInfo.data.avatar = `${CDN_IMAGE}/avatars/${userInfo.data.id}/${userInfo.data.avatar}`
+
+      const userData = {
+        ...userInfo.data,
+        firstName,
+      }
+
+      await AsyncStorage.setItem(COLLECTION_USERS, JSON.stringify(userData))
+
+      setUser(userData)
+    } catch (error) {
+      if (error.status === 401) {
+        signOut()
+      }
     } finally {
       setLoading(false)
     }
@@ -92,7 +105,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 
       api.defaults.headers.authorization = `Bearer ${userLogged.token}`
 
-      setUser(userLogged)
+      await me()
     }
   }
 
