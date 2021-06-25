@@ -23,8 +23,8 @@ const Home: React.FC = () => {
     categoryId === category ? setcategory('') : setcategory(categoryId)
   }
 
-  function handleAppointmentDetails() {
-    navigation.navigate('AppointmentDetails')
+  function handleAppointmentDetails(guildSelected: AppointmentProps) {
+    navigation.navigate('AppointmentDetails', { guildSelected })
   }
 
   function handleAppointmentCreate() {
@@ -75,8 +75,8 @@ const Home: React.FC = () => {
           loading ? <Load/> : 
           <>
             <ListHeader
-            title="Partidas agendadas"
-            subtitle={`Total ${appointments.length}`}
+              title="Partidas agendadas"
+              subtitle={`Total ${appointments.length}`}
             />
             <FlatList
               data={appointments}
@@ -84,7 +84,7 @@ const Home: React.FC = () => {
               renderItem={(info => (
                 <Appointment
                   data={info.item}
-                  onPress={handleAppointmentDetails}
+                  onPress={() => handleAppointmentDetails(info.item)}
                 ></Appointment>
               ))}
               style={styles.matches}

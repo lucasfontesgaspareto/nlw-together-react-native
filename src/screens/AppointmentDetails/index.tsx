@@ -13,8 +13,18 @@ import ListHeader from '../../components/ListHeader';
 import Member, { MemberProps } from '../../components/Member';
 import ListDivider from '../../components/ListDivider';
 import ButtonIcon from '../../components/ButtonIcon';
+import { useRoute } from '@react-navigation/native';
+import { AppointmentProps } from '../../components/Appointment';
+
+type Params = {
+  guildSelected: AppointmentProps
+}
 
 const AppointmentDetails: React.FC = () => {
+  const route = useRoute()
+
+  const { guildSelected } = route.params as Params
+
   return (
     <Background>
       <View style={styles.container}>
@@ -36,9 +46,11 @@ const AppointmentDetails: React.FC = () => {
           source={BannerImg}
         >
           <View style={styles.bannerContent}>
-            <Text style={styles.title}>Lendários</Text>
+            <Text style={styles.title}>
+              {guildSelected.guild.name}
+            </Text>
             <Text style={styles.subtitle}>
-              É hoje que vamos chegar ao challenger sem perder uma partida da md10
+              {guildSelected.description}
             </Text>
           </View>
         </ImageBackground>
