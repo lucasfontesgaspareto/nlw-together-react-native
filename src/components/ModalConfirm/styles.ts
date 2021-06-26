@@ -23,12 +23,6 @@ export const styles = StyleSheet.create({
     fontSize: 24,
     color: theme.colors.heading
   },
-  titleLogo: {
-    fontFamily: theme.fonts.title700,
-  },
-  titleLogoRed: {
-    color: theme.colors.primary
-  },
   footer: {
     flexDirection: 'row',
     marginHorizontal: 23,

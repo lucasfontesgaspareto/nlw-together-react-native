@@ -23,5 +23,11 @@ export const styles = StyleSheet.create({
   message: {
     fontFamily: theme.fonts.text400,
     color: theme.colors.highlight,
-  }
+  },
+  titleLogo: {
+    fontFamily: theme.fonts.title700,
+  },
+  titleLogoRed: {
+    color: theme.colors.primary
+  },
 })

@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { useAuth } from '../../hooks/auth';
 import Avatar from '../Avatar';
-import ModalSignOut from '../ModalSignOut';
+import ModalConfirm from '../ModalConfirm';
 import { styles } from './styles';
 
 const textos = [
@@ -54,7 +54,14 @@ const Profile: React.FC = () => {
         </Text>
       </View>
       
-      <ModalSignOut
+      <ModalConfirm
+        childrenText={<>
+          Deseja sair do
+          <Text style={styles.titleLogo}>
+            {' '}
+            gg<Text style={styles.titleLogoRed}>Play</Text>?
+          </Text>
+        </>}
         visible={openSignOutModal}
         onConfirm={handleSignOut}
         onCancel={handleCancel}

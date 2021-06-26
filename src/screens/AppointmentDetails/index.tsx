@@ -22,6 +22,7 @@ import * as Linking from 'expo-linking'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { COLLECTION_APPOINTMENTS } from '../../config/database';
 import Button from '../../components/Button';
+import ModalConfirm from '../../components/ModalConfirm';
 
 type Params = {
   guildSelected: AppointmentProps
@@ -40,6 +41,7 @@ const AppointmentDetails: React.FC = () => {
   const [widget, setWidget] = useState<GuildWidget>({} as GuildWidget);
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
+  const [openRemoveModal, setOpenRemoveModal] = useState(false);
 
   const { guildSelected } = route.params as Params
   
@@ -73,6 +75,8 @@ const AppointmentDetails: React.FC = () => {
   }
 
   async function handleRemoveAppointment(appointmentId: string) {
+    setOpenRemoveModal(false)
+
     const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS)
 
     const appointments = storage ? JSON.parse(storage) : []
@@ -83,6 +87,14 @@ const AppointmentDetails: React.FC = () => {
     )
 
     navigation.navigate('Home')
+  }
+
+  function handleRemoveModal() {
+    setOpenRemoveModal(true)
+  }
+
+  function handleCancel() {
+    setOpenRemoveModal(false)
   }
 
   useEffect(() => {
@@ -157,11 +169,18 @@ const AppointmentDetails: React.FC = () => {
             <Button
               title="Remover partida"
               status="danger"
-              onPress={() => handleRemoveAppointment(guildSelected.id)}  
+              onPress={handleRemoveModal}  
             />
           </View>
         </View>
       </View>
+
+      <ModalConfirm
+        title="Confirmar?"
+        visible={openRemoveModal}
+        onConfirm={() => handleRemoveAppointment(guildSelected.id)}
+        onCancel={handleCancel}
+      />
     </Background>
   );
 }

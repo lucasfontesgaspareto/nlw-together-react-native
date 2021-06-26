@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Modal, ModalProps, View, Text, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import Background from '../Background';
 import { styles } from './styles';
 
 type Props = ModalProps & {
+  title?: string;
+  childrenText?: ReactNode;
   onConfirm: () => void;
   onCancel: () => void;
 }
 
-const ModalSignOut: React.FC<Props> = ({
+const ModalConfirm: React.FC<Props> = ({
+  title,
+  childrenText,
   onConfirm,
   onCancel,
   ...rest
@@ -27,11 +31,7 @@ const ModalSignOut: React.FC<Props> = ({
             <View style={styles.content}>
               <View style={styles.header}>
                 <Text style={styles.title}>
-                  Deseja sair do
-                  <Text style={styles.titleLogo}>
-                    {' '}
-                    gg<Text style={styles.titleLogoRed}>Play</Text>?
-                  </Text>
+                  {childrenText ? childrenText : title ? title : ''}
                 </Text>
               </View>
               <View style={styles.footer}>
@@ -59,4 +59,4 @@ const ModalSignOut: React.FC<Props> = ({
   );
 }
 
-export default ModalSignOut;
+export default ModalConfirm;
