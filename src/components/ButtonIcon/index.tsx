@@ -16,7 +16,6 @@ const ButtonIcon: React.FC<Props> = ({ title, status, ...rest }) => {
   const isDanger = status === 'danger'
   const isSuccess = status === 'success'
   const bg = isDanger ? theme.colors.danger : isSuccess ? theme.colors.on : theme.colors.primary
-
   const color = isDanger || isSuccess ? theme.colors.light : theme.colors.secondary100
 
   return (

@@ -16,9 +16,12 @@ import ButtonIcon from '../../components/ButtonIcon';
 import { AppointmentProps } from '../../components/Appointment';
 import { api } from '../../services/api';
 import { Load } from '../../components/Load';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import * as Linking from 'expo-linking'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { COLLECTION_APPOINTMENTS } from '../../config/database';
+import Button from '../../components/Button';
 
 type Params = {
   guildSelected: AppointmentProps
@@ -36,6 +39,7 @@ const AppointmentDetails: React.FC = () => {
   const route = useRoute()
   const [widget, setWidget] = useState<GuildWidget>({} as GuildWidget);
   const [loading, setLoading] = useState(true);
+  const navigation = useNavigation();
 
   const { guildSelected } = route.params as Params
   
@@ -66,6 +70,19 @@ const AppointmentDetails: React.FC = () => {
 
   function handleOpenGuild() {
     Linking.openURL(widget.instant_invite)
+  }
+
+  async function handleRemoveAppointment(appointmentId: string) {
+    const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS)
+
+    const appointments = storage ? JSON.parse(storage) : []
+    
+    await AsyncStorage.setItem(
+      COLLECTION_APPOINTMENTS,
+      JSON.stringify(appointments.filter((item: AppointmentProps) => item.id !== appointmentId))
+    )
+
+    navigation.navigate('Home')
   }
 
   useEffect(() => {
@@ -133,6 +150,16 @@ const AppointmentDetails: React.FC = () => {
               onPress={handleOpenGuild}  
             />
           }
+          
+          <View 
+            style={{ marginTop: 24 }}
+          >
+            <Button
+              title="Remover partida"
+              status="danger"
+              onPress={() => handleRemoveAppointment(guildSelected.id)}  
+            />
+          </View>
         </View>
       </View>
     </Background>
