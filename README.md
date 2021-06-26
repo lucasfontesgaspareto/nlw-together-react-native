@@ -16,6 +16,13 @@
 
 <br>
 
+<h1 align="center">
+
+  <img alt="gameplay" title="Gameplay" src=".github/usage.gif" />
+</h1>
+
+<br>
+
 ## 🧪 Technologies
 
 This project was developed using the following technologies:
